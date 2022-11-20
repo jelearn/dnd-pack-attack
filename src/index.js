@@ -26,7 +26,7 @@ const formikEnhancer = withFormik({
     hit_mod: Yup.number(),
     dice: Yup.string()
       .min(3, "Provide a dice roll, e.g. 2d4+1 or 1d12")
-      .matches(/^[0-9]+d[0-9](\+[0-9]+)?$/, "Must match dice roll pattern.")
+      .matches(/^[0-9]+d[0-9]+(\+[0-9]+)?$/, "Must match dice roll pattern.")
       .required("Must specify a dice roll")
   }),
 

@@ -25,8 +25,8 @@ function attackRoll(
   }
 
   if (
-    (attack == 1 && !adv_modifier) ||
-    (attack == 1 && attack_adv == 1 && adv_modifier)
+    (attack === 1 && !adv_modifier) ||
+    (attack === 1 && attack_adv === 1 && adv_modifier)
   ) {
     // Critical Fails
     console.log("--> CRITICAL MISS!");
@@ -47,7 +47,7 @@ function attackRoll(
     damage += dmg_bonus;
 
     let type = 1;
-    if (attack == 20 || (adv_modifier && attack_adv == 20)) {
+    if (attack === 20 || (adv_modifier && attack_adv === 20)) {
       type = 2;
       let crit_dmg = dmg_die * dmg_die_cnt;
       damage += crit_dmg;
@@ -99,11 +99,11 @@ function parseDice(dice) {
   if (mod_pos < 0) {
     mod_pos = dice.length;
   } else {
-    bonus = parseInt(dice.slice(mod_pos + 1, dice.length));
+    bonus = parseInt(dice.slice(mod_pos + 1, dice.length), 10);
   }
 
-  let die_cnt = parseInt(dice.slice(0, die_pos));
-  let die = parseInt(dice.slice(die_pos + 1, mod_pos));
+  let die_cnt = parseInt(dice.slice(0, die_pos), 10);
+  let die = parseInt(dice.slice(die_pos + 1, mod_pos), 10 );
 
   return [die_cnt, die, bonus];
 }
@@ -153,9 +153,7 @@ export function packAttack(args) {
   var hit_cnt = 0;
   var crit_fail_cnt = 0;
   for (let x = 0; x < cnt; x++) {
-    let a = 0,
-      b = 0,
-      adv_mod = false;
+    let adv_mod = false;
     if (x < adv_cnt) {
       adv_mod = true;
     }
