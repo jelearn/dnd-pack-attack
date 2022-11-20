@@ -9,16 +9,16 @@
   ],
   "main": "index.js",
   "dependencies": {
+    "assert": "^2.0.0",
     "classnames": "2.2.5",
-    "formik": "1.2.0",
+    "express": "^4.0.0",
+    "express-favicon": "^2.0.1",
+    "formik": "^2.2.9",
+    "path": "^0.12.7",
     "react": "16.8.0",
     "react-dom": "16.8.0",
-    "react-scripts": "^1.0.8",
-    "yup": "0.26.3",
-    "assert": "^2.0.0",
-    "express": "^4.0.0",
-    "path": "^0.12.7",
-    "express-favicon": "^2.0.1"
+    "react-scripts": "^5.0.1",
+    "yup": "^0.32.11"
   },
   "engines": {
     "node": "^19.1.0",
@@ -33,5 +33,17 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
