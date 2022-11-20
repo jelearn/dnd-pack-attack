@@ -1,0 +1,31 @@
+{
+  "name": "formik-12x-building-input-primitives-forked",
+  "version": "0.0.10",
+  "description": "Quick D&D creature pack attack dice rolling utility.",
+  "keywords": [
+    "formik",
+    "forms",
+    "react"
+  ],
+  "homepage": "https://codesandbox.io/s/formik-1-2-x-building-input-primitives-forked-nvtjib?file=/package.json:0-521",
+  "main": "index.js",
+  "dependencies": {
+    "classnames": "2.2.5",
+    "formik": "1.2.0",
+    "react": "16.5.0",
+    "react-dom": "16.5.0",
+    "yup": "0.26.3"
+  },
+  "build": {
+    "licence": "gpl-3.0"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
