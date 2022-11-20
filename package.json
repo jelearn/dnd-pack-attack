@@ -1,5 +1,5 @@
 {
-  "name": "pack-attack-react",
+  "name": "dnd-pack-attack",
   "version": "0.0.10",
   "description": "Quick D&D creature pack attack dice rolling utility.",
   "keywords": [
@@ -7,7 +7,6 @@
     "forms",
     "react"
   ],
-  "homepage": "https://codesandbox.io/s/formik-1-2-x-building-input-primitives-forked-nvtjib?file=/package.json:0-521",
   "main": "index.js",
   "dependencies": {
     "classnames": "2.2.5",
@@ -23,7 +22,7 @@
   },
   "engines": {
     "node": "^19.1.0",
-    "npm": "^6.14.16"
+    "npm": "^8.19.3"
   },
   "build": {
     "licence": "gpl-3.0"
