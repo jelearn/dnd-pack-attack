@@ -119,8 +119,7 @@ const PackAttackForm = (props) => {
   } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <div class="columns">
+
           <TextInput
             id="name"
             type="text"
@@ -131,14 +130,12 @@ const PackAttackForm = (props) => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-        </div>
 
-        <div class="columns">
           <TextInput
             id="ac"
             type="number"
-            label="AC"
-            placeholder="Target AC"
+            label="Target AC"
+            placeholder="Target armor class"
             error={touched.ac && errors.ac}
             value={values.ac}
             onChange={handleChange}
@@ -182,15 +179,13 @@ const PackAttackForm = (props) => {
             id="dice"
             type="tet"
             label="Damage Roll"
-            placeholder="Enter dice roll for damage"
+            placeholder="Enter dice roll for damage, e.g. 2d4+4"
             error={touched.dice && errors.dice}
             value={values.dice}
             onChange={handleChange}
             onBlur={handleBlur}
           />
-        </div>
-      </div>
-      <div class="clear">
+
         <button
           type="button"
           className="outline"
@@ -202,7 +197,7 @@ const PackAttackForm = (props) => {
         <button type="submit" disabled={isSubmitting}>
           Submit
         </button>
-      </div>
+
       {/* <DisplayFormikState {...props} /> */}
 
       <ul>

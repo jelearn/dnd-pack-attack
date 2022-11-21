@@ -159,10 +159,10 @@ export function packAttack(args) {
     }
     let [rtype, rdmg] = attackRoll(ac, adv_mod, hit_mod, die, die_cnt, bonus);
 
-    if (rtype >= 0) {
+    if (rtype > 0) {
       total_damage += rdmg;
       hit_cnt += 1;
-    } else {
+    } else if (rtype < 0) {
       crit_fail_cnt += 1;
     }
   }
