@@ -7,6 +7,14 @@ import * as Yup from "yup";
 import classnames from "classnames";
 
 const attack_history = []
+const attack_default = {
+            name: "",
+            ac: "",
+            cnt: "1",
+            adv_cnt: "0",
+            hit_mod: "0",
+            dice: ""
+          }
 
 const formikEnhancer = withFormik({
   validationSchema: Yup.object().shape({
@@ -14,7 +22,7 @@ const formikEnhancer = withFormik({
       .min(2, "C'mon, your name is longer than that")
       .required("First name is required."),
     ac: Yup.number()
-      .min(0, "C'mon, your name is longer than that")
+      .min(0, "C'mon, your name is tougher than that")
       .required("Target AC is required."),
     cnt: Yup.number()
       .min(1, "Need at least one creature to attack")
@@ -228,14 +236,7 @@ class App extends Component {
         </p>
 
         <PackAttackEnhancedForm
-          attack={{
-            name: "",
-            ac: "",
-            cnt: "",
-            adv_cnt: "",
-            hit_mod: "",
-            dice: ""
-          }}
+          attack={attack_default}
         />
         {/* <MoreResources /> */}
       </div>
