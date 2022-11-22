@@ -32,8 +32,8 @@ function attackRoll(
     console.log("--> CRITICAL MISS!");
     return [-1, 0];
   } else if (
-    attack + attack_modifier >= enemy_ac ||
-    (adv_modifier && attack_adv + attack_modifier >= enemy_ac)
+    (attack + attack_modifier) >= enemy_ac ||
+    (adv_modifier && ((attack_adv + attack_modifier) >= enemy_ac))
   ) {
     // Hits
     let damage = 0;
@@ -126,16 +126,16 @@ export function packAttack(args) {
         name = args[i];
         break;
       case "ac":
-        ac = args[i];
+        ac = parseInt(args[i], 10);
         break;
       case "cnt":
-        cnt = args[i];
+        cnt = parseInt(args[i], 10);
         break;
       case "adv_cnt":
-        adv_cnt = args[i];
+        adv_cnt = parseInt(args[i], 10);
         break;
       case "hit_mod":
-        hit_mod = args[i];
+        hit_mod = parseInt(args[i], 10);
         break;
       case "dice":
         dice = args[i];
