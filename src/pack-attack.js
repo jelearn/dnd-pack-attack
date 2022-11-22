@@ -39,7 +39,7 @@ function attackRoll(
     let damage = 0;
     let dmg_rolls = [];
     for (let d = 0; d < dmg_die_cnt; d++) {
-      let next_dmg = Math.floor(Math.random() * 4) + 1;
+      let next_dmg = Math.floor(Math.random() * dmg_die) + 1;
       dmg_rolls.push(next_dmg);
       damage += next_dmg;
     }
