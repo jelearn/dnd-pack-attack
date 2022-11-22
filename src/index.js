@@ -2,7 +2,7 @@ import "./formik-demo.css";
 import { packAttack } from "./pack-attack.js";
 import React, { Component } from "react";
 import { render } from "react-dom";
-import { withFormik } from "formik";
+import { withFormik, Field } from "formik";
 import * as Yup from "yup";
 import classnames from "classnames";
 
@@ -15,6 +15,14 @@ const attack_default = {
             hit_mod: "0",
             dice: ""
           }
+const creature_presets = [
+	{name: "wolves", hit_mod: 4, dice: "2d4+2"},
+	{name: "direwolves", hit_mod: 5, dice: "2d6+2"},
+	{name: "constrictor snakes", hit_mod: 4, dice: "1d8+2"},
+	{name: "brown bears claw ", hit_mod: 6, dice: "2d6+2"},
+	{name: "brown bears bite ", hit_mod: 6, dice: "1d8+4"},
+	{name: "giant octopus", hit_mod: 5, dice: "2d6+2"}
+]
 
 const formikEnhancer = withFormik({
   validationSchema: Yup.object().shape({
@@ -113,6 +121,42 @@ const TextInput = ({
     </div>
   );
 };
+
+const DropDownInput = ({
+  type,
+  id,
+  label,
+  error,
+  value,
+  onChange,
+  className,
+  ...props
+}) => {
+  const classes = classnames(
+    "input-group",
+    {
+      "animated shake error": !!error
+    },
+    className
+  );
+
+  return (
+    <div className={classes}>
+      <Label htmlFor={id} error={error}>
+        {label}
+      </Label>
+	  <Field name="creature_presets" className="{classes}" component="select" placeholder="Preset Creatures" onChange={onChange}>
+
+	  {creature_presets.map((preset) => (
+        <option key="{preset.name}">{preset.name}</option>
+      ))}
+
+	  </Field>
+      <InputFeedback error={error} />
+    </div>
+  );
+};
+
 const PackAttackForm = (props) => {
   const {
     values,
@@ -128,10 +172,21 @@ const PackAttackForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
 
+		  <DropDownInput
+		    id="creature"
+		    type="text"
+		    label="Creature Preset"
+		    placeholder="Optional Creature Preset"
+        error={touched.creature && errors.creature}
+        value={values.creature}
+        onChange={handleChange}
+        onBlur={handleBlur}
+		  />
+
           <TextInput
             id="name"
             type="text"
-            label="Creature"
+            label="Creature Name"
             placeholder="Name of creatures"
             error={touched.name && errors.name}
             value={values.name}
