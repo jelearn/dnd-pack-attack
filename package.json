@@ -2,6 +2,7 @@
   "name": "dnd-pack-attack",
   "version": "0.0.10",
   "description": "Quick D&D creature pack attack dice rolling utility.",
+  "homepage": ".",
   "keywords": [
     "formik",
     "forms",
