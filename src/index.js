@@ -6,6 +6,8 @@ import { withFormik } from "formik";
 import * as Yup from "yup";
 import classnames from "classnames";
 
+const { REACT_APP_VERSION } = process.env;
+
 const attack_history = []
 const attack_default = {
             name: "",
@@ -59,7 +61,9 @@ const formikEnhancer = withFormik({
       result[1] +
       " damage, with " +
       result[2] +
-      " critical failures.";
+      " critical failures and " +
+      result[3] +
+      " critical successes.";
 
     attack_history.unshift(result_message)
     
@@ -228,7 +232,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <h1>Rolling pack attack damager for D&D</h1>
+        <h1>Rolling pack attack damager for D&D ({REACT_APP_VERSION})</h1>
         <p>
           Using conjure animals and having them attack all at the same time?
           This form helps to you roll their attacks, criticals, damage, and

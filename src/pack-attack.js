@@ -151,6 +151,7 @@ export function packAttack(args) {
 
   var total_damage = 0;
   var hit_cnt = 0;
+  var crit_cnt = 0;
   var crit_fail_cnt = 0;
   for (let x = 0; x < cnt; x++) {
     let adv_mod = false;
@@ -162,6 +163,9 @@ export function packAttack(args) {
     if (rtype > 0) {
       total_damage += rdmg;
       hit_cnt += 1;
+      if (rtype == 2) {
+        crit_cnt += 1;
+      }
     } else if (rtype < 0) {
       crit_fail_cnt += 1;
     }
@@ -170,7 +174,7 @@ export function packAttack(args) {
   if (crit_fail_cnt > 0) {
     console.log(crit_fail_cnt + " " + name + " failed critically!");
   }
-  return [hit_cnt, total_damage, crit_fail_cnt];
+  return [hit_cnt, total_damage, crit_fail_cnt, crit_cnt];
 }
 
 // tests
