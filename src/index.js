@@ -6,6 +6,8 @@ import { withFormik } from "formik";
 import * as Yup from "yup";
 import classnames from "classnames";
 
+import scroll_background from "./img/scroll-png-26394.png";
+
 const { REACT_APP_VERSION } = process.env;
 
 const attack_history = []
@@ -132,6 +134,9 @@ const PackAttackForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
 
+        {/* 1000x800 px */}
+        <div class="scroll_outer" style={{ backgroundImage: `url(${scroll_background})` }}>
+        <div class="scroll_inner">
           <TextInput
             id="name"
             type="text"
@@ -198,6 +203,7 @@ const PackAttackForm = (props) => {
             onBlur={handleBlur}
           />
 
+        <div class="scroll_action">
         <button
           type="button"
           className="outline"
@@ -209,6 +215,9 @@ const PackAttackForm = (props) => {
         <button type="submit" disabled={isSubmitting}>
           Submit
         </button>
+        </div>
+      </div>
+      </div>
 
       {/* <DisplayFormikState {...props} /> */}
 
@@ -239,9 +248,11 @@ class App extends Component {
           misses all at once to save you (and your DM) time.
         </p>
 
+        <div>
         <PackAttackEnhancedForm
           attack={attack_default}
         />
+        </div>
         {/* <MoreResources /> */}
       </div>
     );

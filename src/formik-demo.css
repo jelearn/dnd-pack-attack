@@ -1,3 +1,35 @@
+/* form background */
+
+div.scroll_outer {
+  margin: 0 auto;
+  background-size: contain 100%;
+  background-position: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+div.scroll_inner {
+  padding-top: 150px;
+  padding-bottom: 150px;
+  margin: 0 auto;
+  width: 75%;
+  max-width: 600px;
+  max-height: auto;
+/*
+  padding-right: 100px;
+  padding-left: 100px;
+*/
+}
+
+div.scroll_action {
+  text-align: center;
+}
+/* formik */
+
 div.columns {
   width: 900px;
 }
