@@ -1,33 +1,47 @@
-/* form background */
+/* extra pack attack form styles*/
+
+div.title {
+  justify-content: left;
+  text-align: left;
+}
+
+div.attack_form {
+  justify-content: left;
+  text-align: left;
+}
+
+div.results {
+  justify-content: left;
+  text-align: left;
+}
 
 div.scroll_outer {
   margin: 0 auto;
-  background-size: contain 100%;
-  background-position: cover;
+  background: url('img/scroll-png-26394.png');
+  background-position: left;
   background-repeat: no-repeat;
-  width: 100%;
-  max-width: 1000px;
   height: auto;
-  display: flex;
+  display: grid;
+  padding-top: 188px;
+  padding-bottom: 95px;
+  padding-left: 88px;
+}
+
+div.scroll_contents {
   justify-content: center;
+  text-align: left;
+  max-width: 800px;
+  max-height: 700px;
 }
 
 div.scroll_inner {
-  padding-top: 150px;
-  padding-bottom: 150px;
   margin: 0 auto;
-  width: 75%;
-  max-width: 600px;
-  max-height: auto;
-/*
-  padding-right: 100px;
-  padding-left: 100px;
-*/
 }
 
 div.scroll_action {
   text-align: center;
 }
+
 /* formik */
 
 div.columns {

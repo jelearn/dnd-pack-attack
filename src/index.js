@@ -12,12 +12,12 @@ const { REACT_APP_VERSION } = process.env;
 
 const attack_history = []
 const attack_default = {
-            name: "",
-            ac: "",
-            cnt: "1",
-            adv_cnt: "0",
-            hit_mod: "0",
-            dice: ""
+            name: "Dire Wolves",
+            ac: "15",
+            cnt: "2",
+            adv_cnt: "2",
+            hit_mod: "5",
+            dice: "2d6+3"
           }
 
 const formikEnhancer = withFormik({
@@ -134,8 +134,8 @@ const PackAttackForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
 
-        {/* 1000x800 px */}
-        <div class="scroll_outer" style={{ backgroundImage: `url(${scroll_background})` }}>
+        <div class="scroll_outer">
+        <div class="scroll_contents">
         <div class="scroll_inner">
           <TextInput
             id="name"
@@ -218,42 +218,39 @@ const PackAttackForm = (props) => {
         </div>
       </div>
       </div>
+      </div>
 
-      {/* <DisplayFormikState {...props} /> */}
-
+      <div class="results">
       <ul>
       {attack_history.map((item) => (
         <li>{item}</li>
       ))}
       </ul>
+      </div>
     </form>
   );
 };
 
 const PackAttackEnhancedForm = formikEnhancer(PackAttackForm);
 
-// Helper for the demo
-// import { MoreResources, DisplayFormikState } from './formik-demo';
-
-
-
 class App extends Component {
   render() {
     return (
       <div className="app">
-        <h1>Rolling pack attack damager for D&D ({REACT_APP_VERSION})</h1>
+        <div class="title">
+        <h1>D&D Pack Attack Roller ({REACT_APP_VERSION})</h1>
         <p>
-          Using conjure animals and having them attack all at the same time?
+          Using the conjure animals spell and having them attack all at the same time?
           This form helps to you roll their attacks, criticals, damage, and
           misses all at once to save you (and your DM) time.
         </p>
+        </div>
 
-        <div>
+        <div class="attack_form">
         <PackAttackEnhancedForm
           attack={attack_default}
         />
         </div>
-        {/* <MoreResources /> */}
       </div>
     );
   }
