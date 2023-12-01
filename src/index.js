@@ -239,13 +239,10 @@ class App extends Component {
       <div className="app">
         <div class="title">
         <h1>D&D Pack Attack Roller ({REACT_APP_VERSION})</h1>
-        <p>
           Using the conjure animals spell and having them attack all at the same time?
           This form helps to you roll their attacks, criticals, damage, and
           misses all at once to save you (and your DM) time.
-        </p>
         </div>
-
         <div class="attack_form">
         <PackAttackEnhancedForm
           attack={attack_default}

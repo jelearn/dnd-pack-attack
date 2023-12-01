@@ -16,22 +16,23 @@ div.results {
 }
 
 div.scroll_outer {
-  margin: 0 auto;
+  margin: 0 0;
   background: url('img/scroll-png-26394.png');
-  background-position: left;
+  background-position: center;
   background-repeat: no-repeat;
-  height: auto;
-  display: grid;
-  padding-top: 188px;
-  padding-bottom: 95px;
+  height: 790px;
   padding-left: 88px;
+  padding-right: 88px;
+  max-width: 1000px;
 }
 
 div.scroll_contents {
+  padding-top: 20%;
   justify-content: center;
   text-align: left;
-  max-width: 800px;
+  max-width: 100%;
   max-height: 700px;
+  position: relative;
 }
 
 div.scroll_inner {
