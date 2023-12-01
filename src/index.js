@@ -1,4 +1,5 @@
-import "./formik-demo.css";
+import "./formik.css";
+import "./pack-attack.css";
 import { packAttack } from "./pack-attack.js";
 import React, { Component } from "react";
 import { render } from "react-dom";
