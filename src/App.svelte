@@ -9,15 +9,6 @@
     hit_mod: "5",
     dice: "2d6+3"
   }
-
-	let submittedData = null;
 </script>
 
-<Form data={data} onSubmit={(data) => submittedData = data} />
-
-<div>
-	<span>Submitted Data</span>
-	<pre>
-		{JSON.stringify(submittedData, null, 2)}
-	</pre>
-</div>
+<Form data={data} />

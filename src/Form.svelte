@@ -4,8 +4,7 @@
   import * as yup from 'yup';
 
 	export let data = {};
-	export let result = {};
-	export let onSubmit = () => {};
+	export let result = "";
 
 	let name = data.name ?? '';
 	let ac = data.ac ?? '';
@@ -13,6 +12,190 @@
 	let adv_cnt = data.adv_cnt ?? '';
 	let hit_mod = data.hit_mod ?? '';
 	let dice = data.dice ?? '';
+
+/* pack-attack.js START */
+
+// TODO: Figure out how to keep this in a separate file
+
+function attackRoll(
+  enemy_ac,
+  adv_modifier = true,
+  attack_modifier = 4,
+  dmg_die = 4,
+  dmg_die_cnt = 2,
+  dmg_bonus = 2,
+  attack = Math.floor(Math.random() * 20) + 1,
+  attack_adv = Math.floor(Math.random() * 20) + 1
+) {
+  // Returns: [type, damage]
+  // type on of: -1 = crit miss, 0 = miss, 1 = hit, 2 = crit
+
+  if (adv_modifier) {
+    console.log(
+      "We rolled to hit AC " +
+        enemy_ac +
+        " with advantage, result: " +
+        attack +
+        " and " +
+        attack_adv
+    );
+  } else {
+    console.log("We rolled to hit " + enemy_ac + ", result: " + attack);
+  }
+
+  if (
+    (attack === 1 && !adv_modifier) ||
+    (attack === 1 && attack_adv === 1 && adv_modifier)
+  ) {
+    // Critical Fails
+    console.log("--> CRITICAL MISS!");
+    return [-1, 0];
+  } else if (
+    (attack + attack_modifier) >= enemy_ac ||
+    (adv_modifier && ((attack_adv + attack_modifier) >= enemy_ac))
+  ) {
+    // Hits
+    let damage = 0;
+    let dmg_rolls = [];
+    for (let d = 0; d < dmg_die_cnt; d++) {
+      let next_dmg = Math.floor(Math.random() * dmg_die) + 1;
+      dmg_rolls.push(next_dmg);
+      damage += next_dmg;
+    }
+
+    damage += dmg_bonus;
+
+    let type = 1;
+    if (attack === 20 || (adv_modifier && attack_adv === 20)) {
+      type = 2;
+      let crit_dmg = dmg_die * dmg_die_cnt;
+      damage += crit_dmg;
+      console.log(
+        "--> CRITICAL HIT Dammage roll " +
+          dmg_die_cnt +
+          "d" +
+          dmg_die +
+          " + " +
+          dmg_bonus +
+          " = [" +
+          dmg_rolls +
+          "] + " +
+          dmg_bonus +
+          " + " +
+          crit_dmg +
+          " = " +
+          damage
+      );
+    } else {
+      type = 1;
+      console.log(
+        "--> Dammage roll " +
+          dmg_die_cnt +
+          "d" +
+          dmg_die +
+          " + " +
+          dmg_bonus +
+          " = [" +
+          dmg_rolls +
+          "] + " +
+          dmg_bonus +
+          " = " +
+          damage
+      );
+    }
+
+    return [type, damage];
+  } else {
+    console.log("--> Missed.");
+    return [0, 0];
+  }
+}
+
+function parseDice(dice) {
+  let die_pos = dice.indexOf("d");
+  let mod_pos = dice.indexOf("+");
+  let bonus = 0;
+  if (mod_pos < 0) {
+    mod_pos = dice.length;
+  } else {
+    bonus = parseInt(dice.slice(mod_pos + 1, dice.length), 10);
+  }
+
+  let die_cnt = parseInt(dice.slice(0, die_pos), 10);
+  let die = parseInt(dice.slice(die_pos + 1, mod_pos), 10 );
+
+  return [die_cnt, die, bonus];
+}
+
+export function packAttack(args) {
+  // Set defaults...
+  let name = "wolves",
+    ac = 10,
+    cnt = 16,
+    adv_cnt = cnt,
+    hit_mod = 4,
+    dice = "2d4+2";
+
+  // Support named parameters:
+  // NOTE: Trash languages = trash work arounds.
+  // https://stackoverflow.com/questions/15508282/named-arguments-in-javascript
+  for (var i in args) {
+    switch (i) {
+      case "name":
+        name = args[i];
+        break;
+      case "ac":
+        ac = parseInt(args[i], 10);
+        break;
+      case "cnt":
+        cnt = parseInt(args[i], 10);
+        break;
+      case "adv_cnt":
+        adv_cnt = parseInt(args[i], 10);
+        break;
+      case "hit_mod":
+        hit_mod = parseInt(args[i], 10);
+        break;
+      case "dice":
+        dice = args[i];
+        break;
+      default:
+        break;
+    }
+  }
+
+  console.log(name + " attack!");
+
+  let [die_cnt, die, bonus] = parseDice(dice);
+  var total_damage = 0;
+  var hit_cnt = 0;
+  var crit_cnt = 0;
+  var crit_fail_cnt = 0;
+  for (let x = 0; x < cnt; x++) {
+    let adv_mod = false;
+    if (x < adv_cnt) {
+      adv_mod = true;
+    }
+    let [rtype, rdmg] = attackRoll(ac, adv_mod, hit_mod, die, die_cnt, bonus);
+
+    if (rtype > 0) {
+      total_damage += rdmg;
+      hit_cnt += 1;
+      if (rtype == 2) {
+        crit_cnt += 1;
+      }
+    } else if (rtype < 0) {
+      crit_fail_cnt += 1;
+    }
+  }
+  console.log(hit_cnt + " " + name + " hit for a total of " + total_damage);
+  if (crit_fail_cnt > 0) {
+    console.log(crit_fail_cnt + " " + name + " failed critically!");
+  }
+  return [hit_cnt, total_damage, crit_fail_cnt, crit_cnt];
+}
+
+/* pack-attack.js END */
 
   const { form, errors, state, handleChange, handleSubmit } = createForm({
     initialValues: data,
@@ -37,8 +220,28 @@
         .required("Must specify a dice roll")
     }),
     onSubmit: values => {
-      result = values;
-      onSubmit(values);
+
+      let attack_result = packAttack({
+        name: values.name,
+        ac: values.ac,
+        cnt: values.cnt,
+        adv_cnt: values.adv_cnt,
+        hit_mod: values.hit_mod,
+        dice: values.dice
+      });
+
+      result =
+        attack_result[0] +
+        " " +
+        values.name +
+        " hit for " +
+        attack_result[1] +
+        " damage, with " +
+        attack_result[2] +
+        " critical failures and " +
+        attack_result[3] +
+        " critical successes.";
+
     }
   });
 
@@ -83,12 +286,11 @@
     </div>
   </form>
 	</div>
-</div>
-
-<div class="results">
-  <pre>
-    {JSON.stringify(result, null, 2)}
-  </pre>
+  <div class="results">
+    <pre>
+      {result}
+    </pre>
+  </div>
 </div>
 
 <style>
@@ -96,8 +298,9 @@
 /* extra pack attack form styles */
     
 div.results {
-  justify-content: left;
-  text-align: left;
+  justify-content: center;
+  text-align: center;
+  font-size: 17px;
 } 
   
 div.scroll {
