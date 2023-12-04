@@ -5,6 +5,7 @@
 - [ ] Figure out how to keep the `pack-attack.js` external to the `svelte` files and use it via import.
 - [ ] Figure out how to make CSS definitions imported from separate files.
 - [ ] Improve CSS so it looks better, possibly closer to the old Formik version 0.0.13.
+- [ ] Figure out how do populate `/build` with production optimized build for display on GitHub.
 
 ---
 
