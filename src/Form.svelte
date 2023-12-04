@@ -278,7 +278,7 @@ export function packAttack(args) {
     </div>
     <div>
       <span class="block">Damage dice roll</span>
-      <input type="text" name="dice" bind:value={$form.dice} placeholder="Enter dice roll for damage, e.g. 2d4+4" on:change={handleChange} on:blur={handleChange} />
+      <input type="text" name="dice" bind:value={$form.dice} placeholder="e.g. 2d4+4" on:change={handleChange} on:blur={handleChange} />
       {#if errors.dice}{errors.dice}{/if}
     </div>
     <div class="scroll_action">
