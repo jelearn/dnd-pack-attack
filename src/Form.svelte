@@ -365,8 +365,8 @@ input {
 
 .cell {
   padding-top: 5px;
-  padding-left: 32px;
-  padding-right: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
   padding-bottom: 5px;
 }
 
