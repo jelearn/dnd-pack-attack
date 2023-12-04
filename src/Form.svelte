@@ -249,42 +249,47 @@ export function packAttack(args) {
 
 <div class="scroll">
 	<div class="scroll_contents">
-
-  <form on:submit={handleSubmit}>
-    <div>
-      <span class="block">Creature name</span>
-      <input type="text" name="name" bind:value={$form.name} placeholder="Creature name" on:change={handleChange} on:blur={handleChange} />
-      {#if errors.name}{errors.name}{/if}
-    </div>
-    <div>
-      <span class="block">Target AC</span>
-      <input type="number" name="ac" bind:value={$form.ac} placeholder="Target armor class" on:change={handleChange} on:blur={handleChange} />
-      {#if errors.ac}{errors.ac}{/if}
-    </div>
-    <div>
-      <span class="block"># of creatures</span>
-      <input type="number" name="cnt" bind:value={$form.cnt} placeholder="Enter number of creatures" on:change={handleChange} on:blur={handleChange} />
-      {#if errors.cnt}{errors.cnt}{/if}
-    </div>
-    <div>
-      <span class="block">Attacks with advantage</span>
-      <input type="number" name="adv_cnt" bind:value={$form.adv_cnt} placeholder="Enter number of attacks with advantage" on:change={handleChange} on:blur={handleChange} />
-      {#if errors.adv_cnt}{errors.adv_cnt}{/if}
-    </div>
-    <div>
-      <span class="block">To hit modifier</span>
-      <input type="number" name="hit_mod" bind:value={$form.hit_mod} placeholder="Enter to-hit roll modifier" on:change={handleChange} on:blur={handleChange} />
-      {#if errors.hit_mod}{errors.hit_mod}{/if}
-    </div>
-    <div>
-      <span class="block">Damage dice roll</span>
-      <input type="text" name="dice" bind:value={$form.dice} placeholder="e.g. 2d4+4" on:change={handleChange} on:blur={handleChange} />
-      {#if errors.dice}{errors.dice}{/if}
-    </div>
-    <div class="scroll_action">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-  </form>
+    <form on:submit={handleSubmit}>
+      <div class="row">
+        <div class="cell">
+          <span class="block">Creature name</span>
+          <input type="text" name="name" bind:value={$form.name} placeholder="Creature name" on:change={handleChange} on:blur={handleChange} />
+          {#if errors.name}{errors.name}{/if}
+        </div>
+        <div class="cell">
+          <span class="block">Target AC</span>
+          <input type="number" name="ac" bind:value={$form.ac} placeholder="Target armor class" on:change={handleChange} on:blur={handleChange} />
+          {#if errors.ac}{errors.ac}{/if}
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">
+          <span class="block"># of creatures</span>
+          <input type="number" name="cnt" bind:value={$form.cnt} placeholder="Enter number of creatures" on:change={handleChange} on:blur={handleChange} />
+          {#if errors.cnt}{errors.cnt}{/if}
+        </div>
+        <div class="cell">
+          <span class="block">Attacks with advantage</span>
+          <input type="number" name="adv_cnt" bind:value={$form.adv_cnt} placeholder="Enter number of attacks with advantage" on:change={handleChange} on:blur={handleChange} />
+          {#if errors.adv_cnt}{errors.adv_cnt}{/if}
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">
+          <span class="block">To hit modifier</span>
+          <input type="number" name="hit_mod" bind:value={$form.hit_mod} placeholder="Enter to-hit roll modifier" on:change={handleChange} on:blur={handleChange} />
+          {#if errors.hit_mod}{errors.hit_mod}{/if}
+        </div>
+        <div class="cell">
+          <span class="block">Damage dice roll</span>
+          <input type="text" name="dice" bind:value={$form.dice} placeholder="e.g. 2d4+4" on:change={handleChange} on:blur={handleChange} />
+          {#if errors.dice}{errors.dice}{/if}
+        </div>
+      </div>
+      <div class="scroll_action">
+        <button type="submit" class="btn-submit">Submit</button>
+      </div>
+    </form>
     <div class="results">
       {result}
     </div>
@@ -307,21 +312,19 @@ div.scroll {
   background-position: center;
   background-repeat: no-repeat;
   height: 790px;
-  padding-left: 88px;
-  padding-right: 88px;
   max-width: 1000px;
 }   
     
 div.scroll_contents {
-  padding-top: 20%;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-top: 150px;
+  padding-left: 5%;
+  padding-right: 5%;
   padding-bottom: 20%;
-  justify-content: center;
-  text-align: left;
+  
   max-width: 100%;
   max-height: 700px;
   position: relative;
+
 }
 
 div.scroll_action {
@@ -342,6 +345,29 @@ button {
   cursor: pointer;
   outline: none;
   -webkit-appearance: none;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: block;
+  font-size: 16px;
+  padding: .5rem;
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.cell {
+  padding-top: 5px;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-bottom: 5px;
 }
 
 </style>
