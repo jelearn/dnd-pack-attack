@@ -285,11 +285,9 @@ export function packAttack(args) {
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>
   </form>
-	</div>
-  <div class="results">
-    <pre>
+    <div class="results">
       {result}
-    </pre>
+    </div>
   </div>
 </div>
 
@@ -316,6 +314,9 @@ div.scroll {
     
 div.scroll_contents {
   padding-top: 20%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 20%;
   justify-content: center;
   text-align: left;
   max-width: 100%;
