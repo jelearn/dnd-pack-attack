@@ -1,4 +1,10 @@
-# This repo is no longer maintained. Consider using `npm init vite` and selecting the `svelte` option or — if you want a full-fledged app framework — use [SvelteKit](https://kit.svelte.dev), the official application framework for Svelte.
+# `svelte` Migration TODO:
+
+    - [ ] Get field validation and error display working.
+    - [ ] Migrate to `vite`-based template, as the `degit`-based one is no longer maintained.
+    - [ ] Figure out how to keep the `pack-attack.js` external to the `svelte` files and use it via import.
+    - [ ] Figure out how to make CSS definitions imported from separate files.
+    - [ ] Improve CSS so it looks better, possibly closer to the old Formik version 0.0.13.
 
 ---
 
