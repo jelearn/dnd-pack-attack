@@ -1,10 +1,10 @@
 # `svelte` Migration TODO:
 
-    - [ ] Get field validation and error display working.
-    - [ ] Migrate to `vite`-based template, as the `degit`-based one is no longer maintained.
-    - [ ] Figure out how to keep the `pack-attack.js` external to the `svelte` files and use it via import.
-    - [ ] Figure out how to make CSS definitions imported from separate files.
-    - [ ] Improve CSS so it looks better, possibly closer to the old Formik version 0.0.13.
+- [ ] Get field validation and error display working.
+- [ ] Migrate to `vite`-based template, as the `degit`-based one is no longer maintained.
+- [ ] Figure out how to keep the `pack-attack.js` external to the `svelte` files and use it via import.
+- [ ] Figure out how to make CSS definitions imported from separate files.
+- [ ] Improve CSS so it looks better, possibly closer to the old Formik version 0.0.13.
 
 ---
 
