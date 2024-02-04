@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>D&D Pack Attack Roller</title>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<link href="./_app/immutable/assets/2.T_kvNmPh.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.Z-Hx8n0a.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/entry.DkdGXKDk.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.zMJaRgub.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.JwMnpgIl.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.aJQb2evo.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.vRqeSKyi.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.y8_P649Y.js">
+		<style>
+			div.title {
+				justify-content: left;
+				text-align: left;
+			}
+		</style>
+	</head>
+
+	<body data-sveltekit-preload-data="hover">
+		<div class="title">
+			<h1>D&D Pack Attack Roller</h1>
+			Using the conjure animals spell and having them attack all at the same time? This form helps
+			to you roll their attacks, criticals, damage, and misses all at once to save you (and your DM)
+			time.
+		</div>
+		<div style="display: contents">  <div class="scroll svelte-1tgmkbu"><div class="scroll_contents svelte-1tgmkbu"><form><div class="row svelte-1tgmkbu"><div class="cell svelte-1tgmkbu"><span class="block" data-svelte-h="svelte-1s9ur8">Creature name</span> <input type="text" name="name" placeholder="Creature name" class="svelte-1tgmkbu" value=""> </div> <div class="cell svelte-1tgmkbu"><span class="block" data-svelte-h="svelte-1ehtj5l">Target AC</span> <input type="number" name="ac" placeholder="Target armor class" class="svelte-1tgmkbu" value=""> </div></div> <div class="row svelte-1tgmkbu"><div class="cell svelte-1tgmkbu"><span class="block" data-svelte-h="svelte-13mw2us"># of creatures</span> <input type="number" name="cnt" placeholder="Enter number of creatures" class="svelte-1tgmkbu" value=""> </div> <div class="cell svelte-1tgmkbu"><span class="block" data-svelte-h="svelte-19f7jvm">Attacks with advantage</span> <input type="number" name="adv_cnt" placeholder="Enter number of attacks with advantage" class="svelte-1tgmkbu" value=""> </div></div> <div class="row svelte-1tgmkbu"><div class="cell svelte-1tgmkbu"><span class="block" data-svelte-h="svelte-fa2osz">To hit modifier</span> <input type="number" name="hit_mod" placeholder="Enter to-hit roll modifier" class="svelte-1tgmkbu" value=""> </div> <div class="cell svelte-1tgmkbu"><span class="block" data-svelte-h="svelte-15k8pxb">Damage dice roll</span> <input type="text" name="dice" placeholder="e.g. 2d4+4" class="svelte-1tgmkbu" value=""> </div></div> <div class="scroll_action svelte-1tgmkbu" data-svelte-h="svelte-1h8p3q6"><button type="submit" class="btn-submit svelte-1tgmkbu">Submit</button></div></form> <div class="results svelte-1tgmkbu"></div></div> </div> 
+			
+			<script>
+				{
+					__sveltekit_9yj9nf = {
+						base: new URL(".", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					const data = [null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.Z-Hx8n0a.js"),
+						import("./_app/immutable/entry/app.JwMnpgIl.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
