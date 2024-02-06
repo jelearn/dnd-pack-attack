@@ -9,14 +9,6 @@
 	};
 
 	export let result = '';
-	export let errors = {};
-
-	let name = data.name ?? '';
-	let ac = data.ac ?? '';
-	let cnt = data.cnt ?? '';
-	let adv_cnt = data.adv_cnt ?? '';
-	let hit_mod = data.hit_mod ?? '';
-	let dice = data.dice ?? '';
 
 	/* pack-attack.js START */
 
@@ -199,19 +191,21 @@
 
 	/* pack-attack.js END */
 
-	import * as yup from 'yup';
+  import * as yup from 'yup';
+  import {Form, Message} from 'svelte-yup';
+
 	const schema = yup.object().shape({
 		name: yup
 			.string()
 			.min(2, "C'mon, your name is longer than that")
-			.required('First name is required.'),
+			.required('Creature name is required.'),
 		ac: yup.number().min(0, "C'mon, you're tougher than that").required('Target AC is required.'),
 		cnt: yup
 			.number()
-			.min(1, 'Need at least one creature to attack')
+			.min(1, 'Need at least one creature to attack.')
 			.required('Must specify the number of attacking creatures.'),
-		adv_cnt: yup.number().min(0, "Can't have less then zero creatures with advantage"),
-		hit_mod: yup.number(),
+		adv_cnt: yup.number().min(0, "Can't have less then zero creatures with advantage.").default(0),
+		hit_mod: yup.number().typeError("Must be a number.").default(0).max(19, "Anything less than 20.").min(-19, "Anything greater than -20."),
 		dice: yup
 			.string()
 			.min(3, 'Provide a dice roll, e.g. 2d4+1 or 1d12')
@@ -219,79 +213,56 @@
 			.required('Must specify a dice roll')
 	});
 
-	async function handleChange() {}
 
-	async function handleSubmit() {
-		let values = {
-			name: name,
-			ac: ac,
-			cnt: cnt,
-			adv_cnt: adv_cnt,
-			hit_mod: hit_mod,
-			dice: dice
-		};
+    let fields = data;
+    let submitted = false;
+    let isValid;
 
-		try {
-			await schema.validate(values, { abortEarly: false });
-			errors = {};
-			let attack_result = packAttack({
-				name: values.name,
-				ac: values.ac,
-				cnt: values.cnt,
-				adv_cnt: values.adv_cnt,
-				hit_mod: values.hit_mod,
-				dice: values.dice
-			});
+    function formSubmit(){
+        submitted = true;
+        isValid = schema.isValidSync(fields);
 
-			result =
-				attack_result[0] +
-				' ' +
-				values.name +
-				' hit for ' +
-				attack_result[1] +
-				' damage, with ' +
-				attack_result[2] +
-				' critical failures and ' +
-				attack_result[3] +
-				' critical successes.';
-		} catch (err) {
-			errors = extractErrors(err);
-		}
-	}
-	function extractErrors(err) {
-		return err.inner.reduce((acc, err) => {
-			return { ...acc, [err.path]: err.message };
-		}, {});
-	}
+        if(isValid){
+
+          let attack_result = packAttack(fields);
+          result =
+            attack_result[0] +
+            ' ' +
+            fields.name +
+            ' hit for ' +
+            attack_result[1] +
+            ' damage, with ' +
+            attack_result[2] +
+            ' critical failures and ' +
+            attack_result[3] +
+            ' critical successes.';
+
+        }
+    }
+
 </script>
 
 <div class="scroll">
 	<div class="scroll_contents">
-		<form on:submit|preventDefault={handleSubmit}>
+		<Form class="form" {schema} {fields} submitHandler={formSubmit} {submitted}>
 			<div class="row">
 				<div class="cell">
 					<span class="block">Creature name</span>
 					<input
 						type="text"
-						name="name"
-						bind:value={name}
+						bind:value={fields.name}
 						placeholder="Creature name"
-						on:change={handleChange}
-						on:blur={handleChange}
 					/>
-					{#if errors.name}{errors.name}{/if}
+          <Message name="name" />
 				</div>
 				<div class="cell">
 					<span class="block">Target AC</span>
 					<input
 						type="number"
-						name="ac"
-						bind:value={ac}
+						bind:value={fields.ac}
 						placeholder="Target armor class"
-						on:change={handleChange}
-						on:blur={handleChange}
 					/>
-					{#if errors.ac}{errors.ac}{/if}
+          <Message name="ac" />
 				</div>
 			</div>
 			<div class="row">
@@ -299,25 +270,19 @@
 					<span class="block"># of creatures</span>
 					<input
 						type="number"
-						name="cnt"
-						bind:value={cnt}
+						bind:value={fields.cnt}
 						placeholder="Enter number of creatures"
-						on:change={handleChange}
-						on:blur={handleChange}
 					/>
-					{#if errors.cnt}{errors.cnt}{/if}
+          <Message name="cnt" />
 				</div>
 				<div class="cell">
 					<span class="block">Attacks with advantage</span>
 					<input
 						type="number"
-						name="adv_cnt"
-						bind:value={adv_cnt}
+						bind:value={fields.adv_cnt}
 						placeholder="Enter number of attacks with advantage"
-						on:change={handleChange}
-						on:blur={handleChange}
 					/>
-					{#if errors.adv_cnt}{errors.adv_cnt}{/if}
+          <Message name="adv_cnt" />
 				</div>
 			</div>
 			<div class="row">
@@ -325,31 +290,25 @@
 					<span class="block">To hit modifier</span>
 					<input
 						type="number"
-						name="hit_mod"
-						bind:value={hit_mod}
+						bind:value={fields.hit_mod}
 						placeholder="Enter to-hit roll modifier"
-						on:change={handleChange}
-						on:blur={handleChange}
 					/>
-					{#if errors.hit_mod}{errors.hit_mod}{/if}
+          <Message name="hit_mod" />
 				</div>
 				<div class="cell">
 					<span class="block">Damage dice roll</span>
 					<input
 						type="text"
-						name="dice"
-						bind:value={dice}
+						bind:value={fields.dice}
 						placeholder="e.g. 2d4+4"
-						on:change={handleChange}
-						on:blur={handleChange}
 					/>
-					{#if errors.dice}{errors.dice}{/if}
+          <Message name="dice" />
 				</div>
 			</div>
 			<div class="scroll_action">
 				<button type="submit" class="btn-submit">Submit</button>
 			</div>
-		</form>
+		</Form>
 		<div class="results">
 			{result}
 		</div>
