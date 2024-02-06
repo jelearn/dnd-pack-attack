@@ -1,3 +1,16 @@
+# `svelte` Migration TODO:
+
+- [X] Get field validation and error display working.
+- [X] Migrate to `vite`-based template, as the `degit`-based one is no longer maintained.
+- [ ] Figure out how to keep the `pack-attack.js` external to the `svelte` files and use it via import.
+- [ ] Figure out how to make CSS definitions imported from separate files.
+- [X] Improve CSS so it looks better, possibly closer to the old Formik version 0.0.13.
+- [X] Figure out how do populate `/build` with production optimized build for display on GitHub.
+- [ ] Add form reset button?
+- [ ] Add drop-down for common creatures as well as custom entry.`
+
+---
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
