@@ -195,7 +195,7 @@ const PackAttackForm = (props) => {
 
           <TextInput
             id="dice"
-            type="tet"
+            type="text"
             label="Damage Roll"
             placeholder="Enter dice roll for damage, e.g. 2d4+4"
             error={touched.dice && errors.dice}

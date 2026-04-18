@@ -26,9 +26,9 @@ function attackRoll(
 
   if (
     (attack === 1 && !adv_modifier) ||
-    (attack === 1 && attack_adv === 1 && adv_modifier)
+    (attack === 1 && attack_adv === 1 && adv_modifier)  // with advantage, both dice must be 1
   ) {
-    // Critical Fails
+    // Critical Fail: natural 1 (before modifier) — automatic miss regardless of AC
     console.log("--> CRITICAL MISS!");
     return [-1, 0];
   } else if (
@@ -48,8 +48,10 @@ function attackRoll(
 
     let type = 1;
     if (attack === 20 || (adv_modifier && attack_adv === 20)) {
+      // Critical Hit: natural 20 doubles the dice only — bonus is added once (5e RAW).
+      // e.g. 2d6+3 crit = roll 4d6+3 total, NOT 2*(2d6+3).
       type = 2;
-      let crit_dmg = dmg_die * dmg_die_cnt;
+      let crit_dmg = dmg_die * dmg_die_cnt;  // max value of the extra dice set
       damage += crit_dmg;
       console.log(
         "--> CRITICAL HIT Dammage roll " +
@@ -117,9 +119,7 @@ export function packAttack(args) {
     hit_mod = 4,
     dice = "2d4+2";
 
-  // Support named parameters:
-  // NOTE: Trash languages = trash work arounds.
-  // https://stackoverflow.com/questions/15508282/named-arguments-in-javascript
+  // Support named parameters by iterating the args object:
   for (var i in args) {
     switch (i) {
       case "name":
