@@ -97,7 +97,7 @@ public/
   favicon.ico        # Site favicon
   manifest.json      # PWA manifest
 index.html           # Vite HTML entry template
-vite.config.mjs      # Vite + Svelte build config
+vite.config.js       # Vite + Svelte build config
 server.js            # Express server for production (serves /dist)
 dist/                # Production build output (committed — deployed directly)
 ```

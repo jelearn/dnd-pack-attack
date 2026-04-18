@@ -43,7 +43,7 @@ public/
   favicon.ico        # Site favicon (copied to dist/ on build)
   manifest.json      # PWA manifest
 index.html           # Vite HTML entry template (root level)
-vite.config.mjs      # Vite + Svelte build config (.mjs — ESM required by the Svelte plugin)
+vite.config.js       # Vite + Svelte build config
 server.js            # Express server (production — serves /dist)
 dist/                # Production build output (committed to repo)
 .env                 # VITE_VERSION env var
@@ -53,7 +53,7 @@ Procfile             # Heroku deployment config
 ## Technology Stack
 
 - **Frontend:** Svelte 5 (runes API: `$state`, `$derived`, `$effect`)
-- **Build:** Vite 6 with `@sveltejs/vite-plugin-svelte` (requires `"type": "module"` in package.json)
+- **Build:** Vite 6 with `@sveltejs/vite-plugin-svelte`
 - **Backend:** Express 4 (static file serving only — no API)
 - **Runtime:** Node.js ^19.1.0, npm ^9.1.2
 - **Hosting:** Heroku (primary), GitHub Pages (secondary via `.github/workflows/static.yml`)
