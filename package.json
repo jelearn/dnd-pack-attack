@@ -1,39 +1,39 @@
 {
   "name": "dnd-pack-attack",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Quick D&D creature pack attack dice rolling utility.",
+  "type": "module",
   "homepage": ".",
   "keywords": [
-    "formik",
-    "forms",
-    "react"
+    "svelte",
+    "vite",
+    "dnd",
+    "dice"
   ],
-  "main": "index.js",
   "dependencies": {
     "assert": "^2.0.0",
-    "classnames": "2.3.2",
     "express": "^4.18.2",
     "express-favicon": "^2.0.1",
-    "formik": "^2.2.9",
-    "path": "^0.12.7",
-    "react": "16.8.0",
-    "react-dom": "16.8.0",
-    "react-scripts": "^5.0.1",
-    "yup": "^0.32.11"
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.0",
+    "svelte": "^5.0.0",
+    "vite": "^6.0.0"
   },
   "engines": {
-    "node": "^19.1.0",
-    "npm": "^9.1.2"
+    "node": ">=18.0.0",
+    "npm": ">=9.1.2"
   },
   "build": {
     "licence": "gpl-3.0"
   },
   "scripts": {
     "start": "node server.js",
-    "start-dev": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --input-type=module -e \"import('./src/pack-attack.js').then(() => console.log('Tests passed.')).catch(e => { console.error(e); process.exit(1); })\""
   },
   "browserslist": {
     "production": [

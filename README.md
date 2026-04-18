@@ -59,18 +59,26 @@ The roller implements standard 5e rules:
 
 **Requirements:** Node.js 19+, npm 9+
 
+**Tech stack:** Svelte 5, Vite 6, Express 4
+
 ```bash
 # Install dependencies
 npm install
 
-# Start development server (hot reload, port 3000)
-npm run start-dev
+# Start development server (hot reload, port 5173)
+npm run dev
 
 # Build for production
 npm run build
 
+# Preview production build locally
+npm run preview
+
 # Run production server (port $PORT or 8080)
 npm start
+
+# Run core logic unit tests
+npm test
 ```
 
 ---
@@ -79,28 +87,34 @@ npm start
 
 ```
 src/
+  App.svelte         # Main UI component (form, validation, results)
+  main.js            # Svelte entry point — mounts App to #root
   pack-attack.js     # Core dice rolling logic (attackRoll, parseDice, packAttack)
-  index.js           # React UI and Formik form
   pack-attack.css    # Parchment scroll theme styling
-  formik.css         # Form/input styling
+  app.css            # Form/input/button base styling
+  img/               # Scroll background image
 public/
-  index.html         # HTML template
-server.js            # Express server for production
-build/               # Pre-built bundle (committed — deployed directly)
+  favicon.ico        # Site favicon
+  manifest.json      # PWA manifest
+index.html           # Vite HTML entry template
+vite.config.mjs      # Vite + Svelte build config
+server.js            # Express server for production (serves /dist)
+dist/                # Production build output (committed — deployed directly)
 ```
 
 ---
 
 ## Deployment
 
-**Heroku:** Configured via `Procfile`. `npm start` runs Express which serves `/build`.
+**Heroku:** Configured via `Procfile`. `npm start` runs Express which serves `/dist`.
 
-**GitHub Pages:** Configured via `.github/workflows/static.yml`. Builds and deploys static files on push to main.
+**GitHub Pages:** Configured via `.github/workflows/static.yml`. Builds on push to main and deploys `dist/`.
 
 To release a new version:
-1. Bump `REACT_APP_VERSION` in `.env`
-2. Run `npm run build`
-3. Commit `/build` and push
+1. Bump `version` in `package.json`
+2. Bump `VITE_VERSION` in `.env` to match
+3. Run `npm run build`
+4. Commit `/dist` and push
 
 ---
 

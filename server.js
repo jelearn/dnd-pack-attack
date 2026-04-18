@@ -1,28 +1,15 @@
-//var express = require('express');
-//var app = express();
+import express from 'express';
+import favicon from 'express-favicon';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-//app.use(express.static(__dirname + '/'));
-//app.use(express.static('build'));
-
-//app.listen(process.env.PORT || 8080);
-
-const express = require('express');
-const favicon = require('express-favicon');
-const path = require('path');
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const port = process.env.PORT || 8080;
 const app = express();
 
-app.use(favicon(__dirname + '/build/favicon.ico'));
-// the __dirname is the current directory from where the script is running
-//app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, 'build')));
-app.get('/ping', function (req, res) {
-  return res.send('pong');
-});
-app.get('/index.html', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-app.get('/', function (req, res) {
-  res.redirect('/index.html');
-});
+app.use(favicon(join(__dirname, 'dist', 'favicon.ico')));
+app.use(express.static(join(__dirname, 'dist')));
+app.get('/ping', (req, res) => res.send('pong'));
+app.get('/index.html', (req, res) => res.sendFile(join(__dirname, 'dist', 'index.html')));
+app.get('/', (req, res) => res.redirect('/index.html'));
 app.listen(port);

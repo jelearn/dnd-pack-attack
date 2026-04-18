@@ -1,3 +1,6 @@
+// assert is used by the self-test block at the bottom of this file
+import assert from 'assert';
+
 function attackRoll(
   enemy_ac,
   adv_modifier = true,
@@ -178,8 +181,6 @@ export function packAttack(args) {
 }
 
 // tests
-const assert = require("assert");
-
 let console_log = console.log;
 // Disable logs temporarily unless testing...
 console.log = function () {};
