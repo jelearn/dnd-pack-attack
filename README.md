@@ -39,7 +39,7 @@ Format: `NdS` or `NdS+B`
 The roller implements standard 5e rules:
 
 - **Hit:** d20 roll + modifier ≥ target AC
-- **Critical Hit:** Natural 20 — extra damage dice are added at maximum value (not re-rolled), plus the flat bonus once. e.g., `2d6+3` crit = rolled 2d6 + 12 + 3
+- **Critical Hit:** Natural 20 — extra damage dice are added at maximum value, plus the flat bonus once. e.g., `2d6+3` crit = rolled 2d6 + 12 + 3
 - **Critical Fail:** Natural 1 — automatic miss, no damage. With advantage, both dice must show 1.
 - **Advantage:** Roll two d20s, use the higher result.
 
@@ -88,21 +88,14 @@ npm test
 ## Project Structure
 
 ```
-src/
-  App.svelte         # Main UI component (form, validation, results)
-  main.js            # Svelte entry point — mounts App to #root
-  pack-attack.js     # Core dice rolling logic (attackRoll, parseDice, packAttack)
-  pack-attack.css    # Parchment scroll theme styling
-  app.css            # Form/input/button base styling
-  img/               # Scroll background image
-public/
-  favicon.ico        # Site favicon
-  manifest.json      # PWA manifest
-index.html           # Vite HTML entry template
-vite.config.js       # Vite + Svelte build config
-server.js            # Express server for production (serves /dist)
-dist/                # Production build output (committed — deployed directly)
+src/           # App.svelte (UI), main.js (entry), pack-attack.js (dice logic), CSS
+public/        # favicon.ico, manifest.json
+index.html     # Vite HTML entry template
+server.js      # Express server for production (serves /dist)
+dist/          # Production build output (committed — deployed directly)
 ```
+
+See [AGENTS.md](./AGENTS.md) for the full annotated file tree.
 
 ---
 
