@@ -51,13 +51,14 @@ function attackRoll(
 
     let type = 1;
     if (attack === 20 || (adv_modifier && attack_adv === 20)) {
-      // Critical Hit: natural 20 doubles the dice only — bonus is added once (5e RAW).
-      // e.g. 2d6+3 crit = roll 4d6+3 total, NOT 2*(2d6+3).
+      // Critical Hit: natural 20. Extra dice are added at maximum value (not re-rolled).
+      // e.g. 2d6+3 crit = rolled 2d6 + 12 (max of 2d6) + 3. Note: 5e RAW calls for
+      // re-rolling the extra dice; this is a known deviation that benefits the player.
       type = 2;
-      let crit_dmg = dmg_die * dmg_die_cnt;  // max value of the extra dice set
+      let crit_dmg = dmg_die * dmg_die_cnt;  // intentional: max of extra dice, not a roll
       damage += crit_dmg;
       console.log(
-        "--> CRITICAL HIT Dammage roll " +
+        "--> CRITICAL HIT Damage roll " +
           dmg_die_cnt +
           "d" +
           dmg_die +
@@ -75,7 +76,7 @@ function attackRoll(
     } else {
       type = 1;
       console.log(
-        "--> Dammage roll " +
+        "--> Damage roll " +
           dmg_die_cnt +
           "d" +
           dmg_die +
@@ -233,7 +234,7 @@ assert.equal(
 assert.equal(
   attackRoll(10, true, 1, 4, 2, 2, 10, 19)[0],
   1,
-  "Expecting a dirty 20 is not critial"
+  "Expecting a dirty 20 is not critical"
 );
 
 console.log = console_log;

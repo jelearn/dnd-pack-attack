@@ -2,6 +2,8 @@
 
 A web tool for quickly rolling dice when many creatures attack simultaneously in D&D 5e — most commonly used by Druids with the *Conjure Animals* spell.
 
+See [TODO](TODO.md) for future work ideas and issues.
+
 ---
 
 ## What It Does
@@ -37,7 +39,7 @@ Format: `NdS` or `NdS+B`
 The roller implements standard 5e rules:
 
 - **Hit:** d20 roll + modifier ≥ target AC
-- **Critical Hit:** Natural 20 — damage dice are doubled (extra dice rolled, flat bonus added once). e.g., `2d6+3` crit = 4d6+3, not 2×(2d6+3)
+- **Critical Hit:** Natural 20 — extra damage dice are added at maximum value (not re-rolled), plus the flat bonus once. e.g., `2d6+3` crit = rolled 2d6 + 12 + 3
 - **Critical Fail:** Natural 1 — automatic miss, no damage. With advantage, both dice must show 1.
 - **Advantage:** Roll two d20s, use the higher result.
 
@@ -57,7 +59,7 @@ The roller implements standard 5e rules:
 
 ## Development Setup
 
-**Requirements:** Node.js 19+, npm 9+
+**Requirements:** Node.js 18+, npm 9+
 
 **Tech stack:** Svelte 5, Vite 6, Express 4
 

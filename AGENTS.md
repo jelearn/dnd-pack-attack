@@ -22,7 +22,7 @@ Understanding these mechanics is required to maintain the dice logic in `src/pac
 
 - **Attack roll:** Roll 1d20, add hit modifier. If result >= target AC, it's a hit.
 - **Advantage:** Roll 2d20, use the higher result. Either die showing a hit counts as a hit.
-- **Critical Hit (Crit):** Natural 20 on the d20 (before modifier). Damage dice are doubled by adding an extra set of dice rolls equal to the base dice count — the flat bonus is added only once. e.g., `2d6+3` on a crit = roll 4d6+3 total, NOT 2×(2d6+3).
+- **Critical Hit (Crit):** Natural 20 on the d20 (before modifier). The extra crit dice are added at their **maximum value** (not randomly re-rolled) — the flat bonus is added only once. e.g., `2d6+3` crit = rolled 2d6 + 12 (max of 2d6) + 3. This deviates from 5e RAW (which calls for re-rolling the extra dice) but is a deliberate player-favourable choice. Do not change this without discussion.
 - **Critical Fail:** Natural 1 on the d20. With advantage, BOTH dice must show 1 for a crit fail. Always misses, deals no damage.
 - **Miss:** Attack roll + modifier < AC. No damage.
 - **Hit:** Attack roll + modifier >= AC. Roll damage dice normally.
