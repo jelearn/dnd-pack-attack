@@ -8,6 +8,7 @@
 
 # build output
 /dist
+/build
 
 # Claude Code local settings (machine-specific, not for version control)
 .claude/
